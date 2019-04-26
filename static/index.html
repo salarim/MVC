@@ -227,6 +227,7 @@
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (data) {
+                loadStudents();
                 loadCourses();
             },
             error: function (jqxhr) {
@@ -245,6 +246,7 @@
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (data) {
+                loadStudents();
                 loadCourses();
             },
             error: function (jqxhr) {

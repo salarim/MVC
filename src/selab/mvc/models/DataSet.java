@@ -22,4 +22,8 @@ public class DataSet<T extends Model> {
     public ArrayList<T> getAll() {
         return new ArrayList(set.values());
     }
+
+    public T remove(String key) {
+        return set.remove(key);
+    }
 }

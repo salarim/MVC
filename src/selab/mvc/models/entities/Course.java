@@ -94,6 +94,10 @@ public class Course implements Model {
         students.put(student, points);
     }
 
+    public void deleteStudent(Student student) {
+        students.remove(student);
+    }
+
     /**
      *
      * @param value The value to be validated as course number

@@ -57,6 +57,10 @@ public class Student implements Model {
         courses.put(course, points);
     }
 
+    public void deleteCourse(Course course) {
+        courses.remove(course);
+    }
+
     /**
      *
      * @param studentNo Student number to be checeked
