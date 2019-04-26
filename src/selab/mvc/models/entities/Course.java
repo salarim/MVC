@@ -3,6 +3,7 @@ package selab.mvc.models.entities;
 import selab.mvc.models.Model;
 import sun.misc.Regexp;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Course implements Model {
@@ -11,6 +12,7 @@ public class Course implements Model {
     private String startTime = null;
     private String endTime = null;
     private Weekday weekday;
+    private HashMap<String, Integer> students = new HashMap<>();
 
 
     @Override
@@ -68,6 +70,14 @@ public class Course implements Model {
     public String getStudents() {
         // TODO: Return a comma separated list of student names
         return "-";
+    }
+
+    public void addStudent(Student student, int points) {
+        String key = student.getPrimaryKey();
+        if (students.containsKey(key))
+            throw new IllegalArgumentException("Duplicate student primary key.");
+
+        students.put(key, points);
     }
 
     /**

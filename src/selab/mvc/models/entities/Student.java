@@ -2,11 +2,13 @@ package selab.mvc.models.entities;
 
 import selab.mvc.models.Model;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Student implements Model {
     private String name;
     private String studentNo;
+    private HashMap<String, Integer> courses = new HashMap<>();
 
     @Override
     public String getPrimaryKey() {
@@ -32,6 +34,14 @@ public class Student implements Model {
     public String getCourses() {
         // TODO: Return a comma separated list of course names
         return "-";
+    }
+
+    public void addCourse(Course course, int points) {
+        String key = course.getPrimaryKey();
+        if (courses.containsKey(key))
+            throw new IllegalArgumentException("Duplicate course primary key.");
+
+        courses.put(key, points);
     }
 
     /**
