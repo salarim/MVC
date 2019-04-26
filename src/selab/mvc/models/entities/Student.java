@@ -29,7 +29,11 @@ public class Student implements Model {
     public String getStudentNo() { return this.studentNo; }
 
     public float getAverage() {
-        // TODO: Calculate and return the average of the points
+        float result = 0;
+        for(int point: courses.values())
+            result += point;
+        if(!courses.isEmpty())
+            return result / courses.size();
         return 0;
     }
 
