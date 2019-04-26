@@ -2,13 +2,15 @@ package selab.mvc.models.entities;
 
 import selab.mvc.models.Model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Student implements Model {
     private String name;
     private String studentNo;
-    private HashMap<String, Integer> courses = new HashMap<>();
+    private HashMap<Course, Integer> courses = new HashMap<>();
 
     @Override
     public String getPrimaryKey() {
@@ -32,16 +34,23 @@ public class Student implements Model {
     }
 
     public String getCourses() {
-        // TODO: Return a comma separated list of course names
-        return "-";
+        List<Course> coursesSet = new ArrayList<>(courses.keySet());
+        String result = "";
+        for(int i=0; i<coursesSet.size(); i++){
+            result += coursesSet.get(i).getTitle();
+            if(i != coursesSet.size()-1)
+                result += ',';
+        }
+        if(result.isEmpty())
+            return "-";
+        return result;
     }
 
     public void addCourse(Course course, int points) {
-        String key = course.getPrimaryKey();
-        if (courses.containsKey(key))
+        if (courses.containsKey(course))
             throw new IllegalArgumentException("Duplicate course primary key.");
 
-        courses.put(key, points);
+        courses.put(course, points);
     }
 
     /**
@@ -52,5 +61,17 @@ public class Student implements Model {
     private boolean validateStudentNo(String studentNo) {
         Pattern pattern = Pattern.compile("^[8-9]\\d{7}$");
         return pattern.matcher(studentNo).find();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return getPrimaryKey().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        return o instanceof Student && getPrimaryKey().equals(((Student) o).getPrimaryKey());
     }
 }
