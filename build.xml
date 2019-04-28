@@ -5,7 +5,7 @@
     </path>
 
     <target name="compile">
-        <mkdir dir="${basedir}"/>
+        <mkdir dir="${basedir}\dest"/>
         <javac srcdir="${basedir}\src" destdir="${basedir}\dest" classpathref="classpath"/>
     </target>
 
