@@ -31,8 +31,8 @@
     <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="${basedir}/lib/checkstyle-8.19-all.jar"/>
 
     <target name="lint">
-        <checkstyle config="${basedir}\lib\checkstyle_checks.xml">
-            <fileset dir="${basedir}\src" includes="**/*.java"/>
+        <checkstyle config="${basedir}/lib/checkstyle_checks.xml">
+            <fileset dir="${basedir}/src" includes="**/*.java"/>
         </checkstyle>
     </target>
 
