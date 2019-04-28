@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<project name="Hello world project">
+    <path id="classpath">
+        <fileset dir="${basedir}/lib" includes="*.jar"/>
+    </path>
+
+    <target name="compile">
+        <mkdir dir="${basedir}"/>
+        <javac srcdir="${basedir}\src" destdir="${basedir}\dest" classpathref="classpath"/>
+    </target>
+
+    <target name="make" depends="compile">
+        <mkdir dir="${basedir}\dest\jar"/>
+        <mkdir dir="${basedir}\dest\jar\static"/>
+        <delete includeEmptyDirs="true">
+            <fileset dir="${basedir}\dest\jar" includes="*.jar"/>
+        </delete>
+        <copy todir="${basedir}\dest\jar\static" >
+            <fileset dir="${basedir}\static" includes="**"/>
+        </copy>
+        <jar destfile="${basedir}\dest\jar\HelloWorld.jar" basedir="${basedir}\dest">
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+            <zipgroupfileset dir="${basedir}\lib">
+                <include name="*.jar" />
+            </zipgroupfileset>
+        </jar>
+    </target>
+
+    <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="${basedir}/lib/checkstyle-8.19-all.jar"/>
+
+    <target name="lint">
+        <checkstyle config="${basedir}\lib\checkstyle_checks.xml">
+            <fileset dir="${basedir}\src" includes="**/*.java"/>
+        </checkstyle>
+    </target>
+
+</project>
+
